@@ -1,2 +1,47 @@
-# auth_rbac_thinkphp5.0
-简单实现基于角色的权限控制，使用thinkphp5.0框架敏捷开发，实用的鉴权工具，rbac核心思路
+# 基于角色的权限控制RBAC
+
+## 1 开发环境
+
+### 1.1 开发工具
+
+- PhpStorm 2016.3.3
+- Sublime Text 3
+
+### 1.2 运行环境
+
+- Thinkphp5.0.12
+- MySQL 5.5.53
+- php 5.6
+- apache
+
+## 2 数据库介绍
+
+- 用户表
+
+```sql
+CREATE TABLE `ng_admin` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `user_name` varchar(60) NOT NULL DEFAULT '' COMMENT '用户名',
+  `email` varchar(60) NOT NULL DEFAULT '' COMMENT '邮箱',
+  `password` varchar(32) NOT NULL DEFAULT '' COMMENT '密码',
+  `salt` varchar(10) DEFAULT NULL COMMENT '秘钥',
+  `last_login_time` int(11) NOT NULL DEFAULT 0 COMMENT '最近登录时间',
+  `last_login_ip` varchar(15) NOT NULL DEFAULT 0 COMMENT '最近登录IP',
+  `role_id` int(11) DEFAULT '0' COMMENT '角色id',
+  PRIMARY KEY (`id`),
+  KEY `user_name` (`user_name`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+```
+
+- 角色
+
+```sql
+CREATE TABLE `ng_role` (
+  `id` smallint(6) unsigned NOT NULL AUTO_INCREMENT COMMENT '角色ID',
+  `role_name` varchar(30) DEFAULT NULL COMMENT '角色名称',
+  `act_list` text COMMENT '权限列表',
+  `role_desc` varchar(255) DEFAULT NULL COMMENT '角色描述',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+```
+
