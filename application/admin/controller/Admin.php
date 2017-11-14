@@ -7,6 +7,7 @@
  */
 
 namespace app\admin\controller;
+use app\common\model\Admin as AdminModel;
 
 
 class Admin extends Base
@@ -15,7 +16,13 @@ class Admin extends Base
     {
         $list = '';
         $admin_info = ['user_name'=>'','admin_id'=>1];
-        $this->assign(compact('list', 'admin_info'));
+
+        $act_list = session('act_list');
+        $menu_list = getMenuList($act_list);
+        $admin_info = AdminModel::getAdminInfo(session('admin_id'));
+        $menu = getMenuArr();
+
+        $this->assign(compact('list', 'menu_list', 'admin_info', 'menu'));
         return view();
     }
 

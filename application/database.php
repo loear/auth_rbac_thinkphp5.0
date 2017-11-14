@@ -13,13 +13,13 @@ return [
     // 数据库类型
     'type'            => 'mysql',
     // 服务器地址
-    'hostname'        => '127.0.0.1',
+    'hostname'        => '119.23.65.250',
     // 数据库名
     'database'        => 'ng_auth_rbac',
     // 用户名
-    'username'        => 'root',
+    'username'        => 'guo',
     // 密码
-    'password'        => 'root',
+    'password'        => 'sn_123456',
     // 端口
     'hostport'        => '3306',
     // 连接dsn
