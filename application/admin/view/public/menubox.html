@@ -10,17 +10,17 @@
             <li><a href="javascript:void(0);" data-param="map-mobile">手机端</a></li>
             <li><a href="javascript:void(0);" data-param="map-resource">资源</a></li>
         </ul>
-        <foreach name="menu" item="vo" key="mk">
+        {foreach name="menu" item="vo" key="mk"}
             <div class="admincp-map-div" data-param="map-{$mk}">
-                <foreach name="vo[child]" item="v2">
+                {foreach name="vo.child" item="v2"}
                     <dl><dt>{$v2.name}</dt>
-                        <foreach name="v2[child]" item="v3">
+                        {foreach name="v2.child" item="v3"}
                             <dd class=""><a href="javascript:void(0);" data-param="{$v3.act}|{$v3.op}">{$v3.name}</a><i class="fa fa-check-square-o"></i></dd>
-                        </foreach>
+                        {/foreach}
                     </dl>
-                </foreach>
+                {/foreach}
             </div>
-        </foreach>
+        {/foreach}
     </div>
     <script>
         //固定层移动

@@ -10,21 +10,21 @@
             </dd>
         </dl>
     </div>
-    <foreach name="menu" item="vo" key="mk">
+    {foreach name="menu" id="vo" key="mk"}
         <div id="admincpNavTabs_{$mk}" class="nav-tabs">
-            <foreach name="vo[child]" item="v2">
+            {foreach name="vo.child" id="v2"}
                 <dl>
                     <dt><a href="javascript:void(0);"><span class="ico-{$mk}-{$key}"></span><h3>{$v2.name}</h3></a></dt>
                     <dd class="sub-menu">
                         <ul>
-                            <foreach name="v2[child]" item="v3">
+                            {foreach name="v2.child" id="v3"}
                                 <li><a href="javascript:void(0);" data-param="{$v3.act}|{$v3.op}">{$v3.name}</a></li>
-                            </foreach>
+                            {/foreach}
                         </ul>
                     </dd>
                 </dl>
-            </foreach>
+            {/foreach}
         </div>
-    </foreach>
-    <div class="about" title="关于系统" onclick="javascript:layer.open({type: 2,title: '关于我们',shadeClose: true,shade: 0.3,area: ['50%', '60%'],content:'{:U("Index/about")}', });"><i class="fa fa-copyright"></i><span>tpshop.cn</span></div>
+    {/foreach}
+    <div class="about" title="关于系统" onclick="javascript:layer.open({type: 2,title: '关于我们',shadeClose: true,shade: 0.3,area: ['50%', '60%'],content:'{:url("Index/about")}', });"><i class="fa fa-copyright"></i><span>loear.com</span></div>
 </div>

@@ -1,105 +1,170 @@
-<!doctype html>
-<html>
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <!-- Apple devices fullscreen -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <!-- Apple devices fullscreen -->
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="shortcut icon" type="image/x-icon" href="__PUBLIC__/images/favicon.ico" media="screen"/>
-    <title>TPshop2.0</title>
-    <script type="text/javascript">
-        var SITEURL = window.location.host +'/index.php/admin';
-    </script>
-    <link rel="stylesheet" type="text/css" href="__PUBLIC__/static/css/main.css" />
-    <link rel="stylesheet" type="text/css" href="__PUBLIC__/static/js/jquery-ui/jquery-ui.min.css" />
-    <link rel="stylesheet" type="text/css" href="__PUBLIC__/static/font/css/font-awesome.min.css" />
-    <script type="text/javascript" src="__PUBLIC__/static/js/jquery.js"></script>
-    <script type="text/javascript" src="__PUBLIC__/static/js/jquery-ui/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="__PUBLIC__/static/js/jquery.cookie.js"></script>
-    <script type="text/javascript" src="__PUBLIC__/static/js/admincp.js"></script>
-    <script type="text/javascript" src="__PUBLIC__/static/js/jquery.validation.min.js"></script>
-    <script type="text/javascript" src="__PUBLIC__/js/layer/layer.js"></script>
-    <script type="text/javascript" src="__PUBLIC__/js/upgrade.js"></script>
-</head>
-<body>
-<include file="public/menubox" />
-<div class="admincp-header">
-    <div class="bgSelector"></div>
-    <div id="foldSidebar"><i class="fa fa-outdent " title="展开/收起侧边导航"></i></div>
-    <div class="admincp-name" onClick="javascript:openItem('welcome|Index');">
-        <!-- <h2 style="cursor:pointer;">TPshop2.0<br>平台系统管理中心</h2> -->
-        <img src="__PUBLIC__/static/images/TPlogo.png" alt="">
-    </div>
-    <div class="nc-module-menu">
-        <ul class="nc-row">
-            <li data-param="system"><a href="javascript:void(0);">系统</a></li>
-            <li data-param="shop"><a href="javascript:void(0);">商城</a></li>
-            <!--      <li data-param="mobile"><a href="javascript:void(0);">模板</a></li>-->
-            <li data-param="resource"><a href="javascript:void(0);">插件</a></li>
-        </ul>
-    </div>
-    <div class="admincp-header-r">
-        <div class="manager">
-
-
-            <dl>
-                <dt class="name">TPshop2.0公测版</dt>
-                <dd class="group">ThinkPHP5框架测试版</dd>
-            </dl>
-            <dl>
-                <dt class="name">{$admin_info.user_name}</dt>
-                <dd class="group">管理员</dd>
-            </dl>
-            <span class="avatar">
-      <!-- 屏蔽管理员头像上传 -->
-                <!-- input name="_pic" type="file" class="admin-avatar-file" id="_pic" title="设置管理员头像"/ -->
-      <img alt="" tptype="admin_avatar" src="__PUBLIC__/static/images/admint.png"> </span><i class="arrow" id="admin-manager-btn" title="显示快捷管理菜单"></i>
-            <div class="manager-menu">
-                <div class="title">
-                    <h4>最后登录</h4>
-                    <a href="javascript:void(0);" onClick="layer.open({type: 2,title: '修改密码',shadeClose: true,shade: 0.3,area: ['30%', '40%'],content:'{:url('Admin/modify_pwd',array('admin_id'=>$admin_info['admin_id']))}'});" class="edit-password">修改密码</a> </div>
-                <div class="login-date"> <?php echo date('Y-m-d H:i:s',session('last_login_time'));?> <span>(IP: <?php echo session('last_login_ip');?> )</span> </div>
-                <div class="title">
-                    <h4>常用操作</h4>
-                    <a href="javascript:void(0)" class="add-menu">添加菜单</a> </div>
-                <ul class="nc-row" tptype="quick_link">
-                    <li><a href="javascript:void(0);" onclick="openItem('index|System')">站点设置</a></li>
-                </ul>
+{include file="public/layout" /}
+<body style="background-color: rgb(255, 255, 255); overflow: auto; cursor: default; -moz-user-select: inherit;">
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+    <div class="fixed-bar">
+        <div class="item-title">
+            <div class="subject">
+                <h3>管理员管理</h3>
+                <h5>网站系统管理员列表</h5>
             </div>
         </div>
-        <ul class="operate nc-row">
-            <!-- li tptype="pending_matters"><a class="toast show-option" href="javascript:void(0);" onClick="$.cookie('commonPendingMatters', 0, {expires : -1});ajax_form('pending_matters', '待处理事项', 'http://www.tpshop.cn/admin/index.php?act=common&op=pending_matters', '480');" title="查看待处理事项">&nbsp;<em>0</em></a></li-->
-            <!-- li><a class="style-color show-option" tptype="map_on" href="javascript:void(0);" title="查看全部管理菜单">&nbsp;</a></li -->
-            <li><a class="sitemap show-option" id="trace_show" href="{:url('System/cleanCache')}" target="workspace" title="更新缓存">&nbsp;</a></li>
-            <li><a class="homepage show-option" target="_blank" href="/" title="新窗口打开商城首页">&nbsp;</a></li>
-            <li><a class="login-out show-option" href="{:url('Admin/logout')}" title="安全退出管理中心">&nbsp;</a></li>
+    </div>
+    <!-- 操作说明 -->
+    <div id="explanation" class="explanation" style="color: rgb(44, 188, 163); background-color: rgb(237, 251, 248); width: 99%; height: 100%;">
+        <div id="checkZoom" class="title"><i class="fa fa-lightbulb-o"></i>
+            <h4 title="提示相关设置操作时应注意的要点">操作提示</h4>
+            <span title="收起提示" id="explanationZoom" style="display: block;"></span>
+        </div>
+        <ul>
+            <li>网站系统管理员, 由总平台设置管理.</li>
         </ul>
     </div>
-    <div class="clear"></div>
+    <div class="flexigrid">
+        <div class="mDiv">
+            <div class="ftitle">
+                <h3>权限资源列表</h3>
+                <h5>(共{$list|count}条记录)</h5>
+            </div>
+            <div title="刷新数据" class="pReload"><i class="fa fa-refresh"></i></div>
+            <form class="navbar-form form-inline" action="{:url('Admin/index')}" method="get">
+                <div class="sDiv">
+                    <div class="sDiv2">
+                        <input type="text" size="30" name="keywords" class="qsbox" placeholder="搜索相关数据...">
+                        <input type="submit" class="btn" value="搜索">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="hDiv">
+            <div class="hDivBox">
+                <table cellspacing="0" cellpadding="0">
+                    <thead>
+                    <tr>
+                        <th class="sign" axis="col0">
+                            <div style="width: 24px;"><i class="ico-check"></i></div>
+                        </th>
+                        <th align="left" abbr="article_title" axis="col3" class="">
+                            <div style="text-align: left; width: 100px;" class="">ID</div>
+                        </th>
+                        <th align="left" abbr="ac_id" axis="col4" class="">
+                            <div style="text-align: left; width: 100px;" class="">用户名</div>
+                        </th>
+                        <th align="center" abbr="article_show" axis="col5" class="">
+                            <div style="text-align: left; width: 100px;" class="">所属角色</div>
+                        </th>
+                        <th align="center" abbr="article_time" axis="col6" class="">
+                            <div style="text-align: left; width: 200px;" class="">Email地址</div>
+                        </th>
+                        <th align="center" abbr="article_time" axis="col6" class="">
+                            <div style="text-align: left; width: 200px;" class="">加入时间</div>
+                        </th>
+                        <th align="center" axis="col1" class="handle">
+                            <div style="text-align: center; width: 150px;">操作</div>
+                        </th>
+                        <th style="width:100%" axis="col7">
+                            <div></div>
+                        </th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div class="tDiv">
+            <div class="tDiv2">
+                <div class="fbutton">
+                    <a href="{:url('Admin/admin_info')}">
+                        <div class="add" title="添加管理员">
+                            <span><i class="fa fa-plus"></i>添加管理员</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+        <div class="bDiv" style="height: auto;">
+            <div id="flexigrid" cellpadding="0" cellspacing="0" border="0">
+                <table>
+                    <tbody>
+                    {foreach name="list" item="vo" key="k" }
+                        <tr>
+                            <td class="sign">
+                                <div style="width: 24px;"><i class="ico-check"></i></div>
+                            </td>
+                            <td align="left" class="">
+                                <div style="text-align: left; width: 100px;">{$vo.admin_id}</div>
+                            </td>
+                            <td align="left" class="">
+                                <div style="text-align: left; width: 100px;">{$vo.user_name}</div>
+                            </td>
+                            <td align="left" class="">
+                                <div style="text-align: left; width: 100px;">{$vo.role}</div>
+                            </td>
+                            <td align="left" class="">
+                                <div style="text-align: left; width: 200px;">{$vo.email}</div>
+                            </td>
+                            <td align="left" class="">
+                                <div style="text-align: left; width: 200px;">{$vo.add_time}</div>
+                            </td>
+                            <td align="center" class="handle">
+                                <div style="text-align: center; width: 170px; max-width:170px;">
+                                    <a href="{:url('Admin/admin_info',array('admin_id'=>$vo['admin_id']))}" class="btn blue"><i class="fa fa-pencil-square-o"></i>编辑</a>
+                                    <if condition="$vo['admin_id'] gt 1">
+                                        <a class="btn red"  href="javascript:void(0)" data-url="{:url('Admin/adminHandle')}" data-id="{$vo.admin_id}" onClick="delfun(this)"><i class="fa fa-trash-o"></i>删除</a>
+                                    </if>
+                                </div>
+                            </td>
+                            <td align="" class="" style="width: 100%;">
+                                <div>&nbsp;</div>
+                            </td>
+                        </tr>
+                    {/foreach}
+                    </tbody>
+                </table>
+            </div>
+            <div class="iDiv" style="display: none;"></div>
+        </div>
+        <!--分页位置-->
+         </div>
 </div>
-<div class="admincp-container unfold">
-    <include file="public/left" />
-    <div class="admincp-container-right">
-        <div class="top-border"></div>
-        <iframe src="" id="workspace" name="workspace" style="overflow: visible;" frameborder="0" width="100%" height="94%" scrolling="yes" onload="window.parent"></iframe>
-    </div>
-</div>
-<script type="text/javascript">
-    // 没有点击收货确定的按钮让他自己收货确定
-    var timestamp = Date.parse(new Date());
-    $.ajax({
-        type:'post',
-        url:"{:url('Admin/System/login_task')}",
-        data:{timestamp:timestamp},
-        timeout : 100000000, //超时时间设置，单位毫秒
-        success:function(){
-            // 执行定时任务
-        }
+<script>
+    $(document).ready(function(){
+        // 表格行点击选中切换
+        $('#flexigrid > table>tbody >tr').click(function(){
+            $(this).toggleClass('trSelected');
+        });
+
+        // 点击刷新数据
+        $('.fa-refresh').click(function(){
+            location.href = location.href;
+        });
+
     });
+
+
+    function delfun(obj) {
+        // 删除按钮
+        layer.confirm('确认删除？', {
+            btn: ['确定', '取消'] //按钮
+        }, function () {
+            $.ajax({
+                type: 'post',
+                url: $(obj).attr('data-url'),
+                data : {act:'del',admin_id:$(obj).attr('data-id')},
+                dataType: 'json',
+                success: function (data) {
+                    layer.closeAll();
+                    if (data == 1) {
+                        $(obj).parent().parent().parent().remove();
+                    } else {
+                        layer.alert('删除失败', {icon: 2});  //alert('删除失败');
+                    }
+                }
+            })
+        }, function () {
+        });
+    }
 </script>
 </body>
 </html>

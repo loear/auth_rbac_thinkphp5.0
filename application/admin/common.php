@@ -6,10 +6,6 @@
  * Time: 23:08
  */
 
-function getAdminInfo($admin_id){
-    return AdminModel::where("admin_id=$admin_id")->find();
-}
-
 function getMenuList($act_list){
     //根据角色权限过滤菜单
     $menu_list = getAllMenu();
