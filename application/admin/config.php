@@ -31,4 +31,5 @@ return [
         '__STATIC__'    =>  '/application/admin/view/static',
         '__ROOT__'      =>  '/'
     ],
+    'auth_code' =>  'Ns3Kd',    // 密码;
 ];

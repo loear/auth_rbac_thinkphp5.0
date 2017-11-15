@@ -9,7 +9,7 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 
-return [
+/*return [
     '__pattern__' => [
         'name' => '\w+',
     ],
@@ -18,4 +18,19 @@ return [
         ':name' => ['index/hello', ['method' => 'post']],
     ],
 
-];
+];*/
+
+use think\Route;
+
+Route::group('admin', function(){
+    // 分类
+    Route::group('admin', [
+        'index'             =>  ['admin/Admin/index',       ['method' => 'get']  ],
+        'admin_info/:id'    =>  ['admin/Admin/adminInfo',   ['method' => 'get'], ['id' => '\d+']  ],
+        'admin_handle'      =>  ['admin/Admin/adminHandle', ['method' => 'post'] ],
+//        'edit/:id'      =>  ['admin/Category/edit',        ['method' => 'get'], ['id' => '\d+']],
+
+    ]);
+
+
+},['ext'=>'html']);

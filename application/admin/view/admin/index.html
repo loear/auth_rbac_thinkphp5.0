@@ -74,7 +74,7 @@
         <div class="tDiv">
             <div class="tDiv2">
                 <div class="fbutton">
-                    <a href="{:url('Admin/admin_info')}">
+                    <a href="{:url('admin/Admin/adminInfo', ['id'=>0])}">
                         <div class="add" title="添加管理员">
                             <span><i class="fa fa-plus"></i>添加管理员</span>
                         </div>
@@ -93,26 +93,26 @@
                                 <div style="width: 24px;"><i class="ico-check"></i></div>
                             </td>
                             <td align="left" class="">
-                                <div style="text-align: left; width: 100px;">{$vo.admin_id}</div>
+                                <div style="text-align: left; width: 100px;">{$vo.id}</div>
                             </td>
                             <td align="left" class="">
                                 <div style="text-align: left; width: 100px;">{$vo.user_name}</div>
                             </td>
                             <td align="left" class="">
-                                <div style="text-align: left; width: 100px;">{$vo.role}</div>
+                                <div style="text-align: left; width: 100px;">{$vo.role?$vo.role.role_name:'未选择'}</div>
                             </td>
                             <td align="left" class="">
                                 <div style="text-align: left; width: 200px;">{$vo.email}</div>
                             </td>
                             <td align="left" class="">
-                                <div style="text-align: left; width: 200px;">{$vo.add_time}</div>
+                                <div style="text-align: left; width: 200px;">{$vo.create_time}</div>
                             </td>
                             <td align="center" class="handle">
                                 <div style="text-align: center; width: 170px; max-width:170px;">
-                                    <a href="{:url('Admin/admin_info',array('admin_id'=>$vo['admin_id']))}" class="btn blue"><i class="fa fa-pencil-square-o"></i>编辑</a>
-                                    <if condition="$vo['admin_id'] gt 1">
-                                        <a class="btn red"  href="javascript:void(0)" data-url="{:url('Admin/adminHandle')}" data-id="{$vo.admin_id}" onClick="delfun(this)"><i class="fa fa-trash-o"></i>删除</a>
-                                    </if>
+                                    <a href="{:url('admin/Admin/adminInfo', ['id'=>$vo['id']])}" class="btn blue"><i class="fa fa-pencil-square-o"></i>编辑</a>
+                                    {if condition="$vo['id'] gt 1"}
+                                        <a class="btn red"  href="javascript:void(0)" data-url="{:url('admin/Admin/adminHandle')}" data-id="{$vo.id}" onClick="delfun(this)"><i class="fa fa-trash-o"></i>删除</a>
+                                    {/if}
                                 </div>
                             </td>
                             <td align="" class="" style="width: 100%;">
@@ -151,7 +151,7 @@
             $.ajax({
                 type: 'post',
                 url: $(obj).attr('data-url'),
-                data : {act:'del',admin_id:$(obj).attr('data-id')},
+                data : {act:'del',id:$(obj).attr('data-id')},
                 dataType: 'json',
                 success: function (data) {
                     layer.closeAll();

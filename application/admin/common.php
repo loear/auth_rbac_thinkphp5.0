@@ -182,3 +182,7 @@ function getMenuArr(){
 function respose($res){
     exit(json_encode($res));
 }
+
+function encrypt($str){
+    return md5(config('auth_code') . $str);
+}
