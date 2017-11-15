@@ -13,6 +13,10 @@ use think\Request;
 
 class Admin extends Base
 {
+    /**
+     * 列表
+     * @return \think\response\View
+     */
     public function index()
     {
         $keywords = input('keywords');
@@ -40,7 +44,10 @@ class Admin extends Base
         return view('admin_info');
     }
 
-
+    /**
+     * 管理
+     * @param Request $request
+     */
     public function adminHandle(Request $request)
     {
         $data = $request->post();
@@ -82,6 +89,13 @@ class Admin extends Base
             $this->error("操作失败", url('admin/Admin/index'));
         }
 
+    }
+
+    public function role()
+    {
+        $list = RoleModel::where([])->order('id desc')->select();
+        $this->assign(compact('list'));
+        return view();
     }
 
 }

@@ -13,7 +13,7 @@ class Role extends Base
 {
     public function index()
     {
-
+        return view();
     }
 
 }
