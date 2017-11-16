@@ -66,4 +66,21 @@ CREATE TABLE `ng_system_menu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ```
 
+- 管理员日志
+
+```sql
+CREATE TABLE `ng_admin_log` (
+  `id` bigint(16) unsigned NOT NULL AUTO_INCREMENT,
+  `admin_id` int(11) DEFAULT NULL,
+  `log_info` varchar(255) DEFAULT NULL,
+  `log_ip` varchar(30) DEFAULT NULL,
+  `log_url` varchar(255) DEFAULT NULL,
+  `log_type` tinyint(2) DEFAULT '0' COMMENT '0默认1操作店铺2审核活动3处理投诉4其他',
+  `create_time` int(11) unsigned DEFAULT NULL COMMENT '创建时间',
+  `update_time` int(11) unsigned DEFAULT NULL COMMENT '更新时间',
+  `delete_time` int(11) unsigned DEFAULT NULL COMMENT '删除时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+```
+
 GRANT ALL PRIVILEGES ON `ng_auth_rbac`.* TO 'guo'@'%' IDENTIFIED BY 'sn_123456' WITH GRANT OPTION;

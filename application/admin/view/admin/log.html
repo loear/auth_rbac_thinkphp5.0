@@ -6,8 +6,8 @@
     <div class="fixed-bar">
         <div class="item-title">
             <div class="subject">
-                <h3>管理员管理</h3>
-                <h5>网站系统管理员列表</h5>
+                <h3>管理员日志列表</h3>
+                <h5>网站系统管理员日志列表</h5>
             </div>
         </div>
     </div>
@@ -18,24 +18,16 @@
             <span title="收起提示" id="explanationZoom" style="display: block;"></span>
         </div>
         <ul>
-            <li>网站系统管理员, 由总平台设置管理.</li>
+            <li>网站管理员日志列表, 由总平台设置管理.</li>
         </ul>
     </div>
     <div class="flexigrid">
         <div class="mDiv">
             <div class="ftitle">
-                <h3>权限资源列表</h3>
+                <h3>管理员日志列表</h3>
                 <h5>(共{$list|count}条记录)</h5>
             </div>
             <div title="刷新数据" class="pReload"><i class="fa fa-refresh"></i></div>
-            <form class="navbar-form form-inline" action="{:url('Admin/index')}" method="get">
-                <div class="sDiv">
-                    <div class="sDiv2">
-                        <input type="text" size="30" name="keywords" class="qsbox" placeholder="搜索相关数据...">
-                        <input type="submit" class="btn" value="搜索">
-                    </div>
-                </div>
-            </form>
         </div>
         <div class="hDiv">
             <div class="hDivBox">
@@ -49,19 +41,16 @@
                             <div style="text-align: left; width: 100px;" class="">ID</div>
                         </th>
                         <th align="left" abbr="ac_id" axis="col4" class="">
-                            <div style="text-align: left; width: 100px;" class="">用户名</div>
+                            <div style="text-align: left; width: 100px;" class="">角色名称</div>
                         </th>
                         <th align="center" abbr="article_show" axis="col5" class="">
-                            <div style="text-align: left; width: 100px;" class="">所属角色</div>
+                            <div style="text-align: left; width: 100px;" class="">描述</div>
                         </th>
-                        <th align="center" abbr="article_time" axis="col6" class="">
-                            <div style="text-align: left; width: 200px;" class="">Email地址</div>
+                        <th align="left" abbr="ac_id" axis="col4" class="">
+                            <div style="text-align: left; width: 100px;" class="">IP</div>
                         </th>
-                        <th align="center" abbr="article_time" axis="col6" class="">
-                            <div style="text-align: left; width: 200px;" class="">加入时间</div>
-                        </th>
-                        <th align="center" axis="col1" class="handle">
-                            <div style="text-align: center; width: 150px;">操作</div>
+                        <th align="center" abbr="article_show" axis="col5" class="">
+                            <div style="text-align: left; width: 200px;" class="">操作时间</div>
                         </th>
                         <th style="width:100%" axis="col7">
                             <div></div>
@@ -70,18 +59,6 @@
                     </thead>
                 </table>
             </div>
-        </div>
-        <div class="tDiv">
-            <div class="tDiv2">
-                <div class="fbutton">
-                    <a href="{:url('admin/Admin/adminInfo', ['id'=>0])}">
-                        <div class="add" title="添加管理员">
-                            <span><i class="fa fa-plus"></i>添加管理员</span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div style="clear:both"></div>
         </div>
         <div class="bDiv" style="height: auto;">
             <div id="flexigrid" cellpadding="0" cellspacing="0" border="0">
@@ -96,24 +73,16 @@
                                 <div style="text-align: left; width: 100px;">{$vo.id}</div>
                             </td>
                             <td align="left" class="">
-                                <div style="text-align: left; width: 100px;">{$vo.user_name}</div>
+                                <div style="text-align: left; width: 100px;">{$vo.admin.user_name}</div>
                             </td>
                             <td align="left" class="">
-                                <div style="text-align: left; width: 100px;">{$vo.role?$vo.role.role_name:'未选择'}</div>
+                                <div style="text-align: left; width: 100px;">{$vo.log_info}</div>
                             </td>
                             <td align="left" class="">
-                                <div style="text-align: left; width: 200px;">{$vo.email}</div>
+                                <div style="text-align: left; width: 100px;">{$vo.log_ip}</div>
                             </td>
                             <td align="left" class="">
                                 <div style="text-align: left; width: 200px;">{$vo.create_time}</div>
-                            </td>
-                            <td align="center" class="handle">
-                                <div style="text-align: center; width: 170px; max-width:170px;">
-                                    <a href="{:url('admin/Admin/adminInfo', ['id'=>$vo['id']])}" class="btn blue"><i class="fa fa-pencil-square-o"></i>编辑</a>
-                                    {if condition="$vo['id'] gt 1"}
-                                        <a class="btn red"  href="javascript:void(0)" data-url="{:url('admin/Admin/adminHandle')}" data-id="{$vo.id}" onClick="delfun(this)"><i class="fa fa-trash-o"></i>删除</a>
-                                    {/if}
-                                </div>
                             </td>
                             <td align="" class="" style="width: 100%;">
                                 <div>&nbsp;</div>
@@ -129,7 +98,7 @@
         <div style="text-align: center">
             {$list->render()}
         </div>
-         </div>
+        </div>
 </div>
 <script>
     $(document).ready(function(){
@@ -145,29 +114,6 @@
 
     });
 
-
-    function delfun(obj) {
-        // 删除按钮
-        layer.confirm('确认删除？', {
-            btn: ['确定', '取消'] //按钮
-        }, function () {
-            $.ajax({
-                type: 'post',
-                url: $(obj).attr('data-url'),
-                data : {act:'del',id:$(obj).attr('data-id')},
-                dataType: 'json',
-                success: function (data) {
-                    layer.closeAll();
-                    if (data == 1) {
-                        $(obj).parent().parent().parent().remove();
-                    } else {
-                        layer.alert('删除失败', {icon: 2});  //alert('删除失败');
-                    }
-                }
-            })
-        }, function () {
-        });
-    }
 </script>
 </body>
 </html>

@@ -9,7 +9,12 @@
 namespace app\common\model;
 
 
+use traits\model\SoftDelete;
+
 class Role extends Base
 {
+    protected $hidden = ['delete_time'];
+
+    use SoftDelete;
 
 }

@@ -183,6 +183,32 @@ function respose($res){
     exit(json_encode($res));
 }
 
+/**
+ * 密码加密方式
+ *
+ * @param $str
+ * @return string
+ */
 function encrypt($str){
     return md5(config('auth_code') . $str);
+}
+
+/**
+ * 获取客户端IP
+ *
+ * @return array|false|string
+ */
+function getIP(){
+    if (getenv("HTTP_CLIENT_IP"))
+        $ip = getenv("HTTP_CLIENT_IP");
+    else if(getenv("HTTP_X_FORWARDED_FOR"))
+        $ip = getenv("HTTP_X_FORWARDED_FOR");
+    else if(getenv("REMOTE_ADDR"))
+        $ip = getenv("REMOTE_ADDR");
+    else $ip = "Unknow";
+
+    if(preg_match('/^((?:(?:25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d)))\.){3}(?:25[0-5]|2[0-4]\d|((1\d{2})|([1 -9]?\d))))$/', $ip))
+        return $ip;
+    else
+        return '';
 }

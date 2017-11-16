@@ -30,13 +30,31 @@ return	array(
             //array('name' => '公告管理', 'act'=>'notice_list', 'op'=>'Article'),
             array('name' => '专题列表', 'act'=>'topicList', 'op'=>'Topic'),
         )),
-        array('name' => '权限','child'=>array(
-            array('name' => '管理员列表', 'act'=>'index', 'op'=>'Admin'),
-            array('name' => '角色管理', 'act'=>'role', 'op'=>'Admin'),
-            array('name'=>'权限资源列表','act'=>'right_list','op'=>'System'),
-            array('name' => '管理员日志', 'act'=>'log', 'op'=>'Admin'),
-            array('name' => '供应商列表', 'act'=>'supplier', 'op'=>'Admin'),
-        )),
+        [
+            'name'  => '权限',
+            'child' =>  [
+                [
+                    'name'  =>  '管理员列表',
+                    'act'   =>  'index',
+                    'op'    =>  'admin'
+                ],
+                [
+                    'name'  =>  '角色管理',
+                    'act'   =>  'role',
+                    'op'    =>  'admin'
+                ],
+                [
+                    'name'  =>  '权限资源列表',
+                    'act'   =>  'right_list',
+                    'op'    =>  'system'
+                ],
+                [
+                    'name'  =>  '管理员日志',
+                    'act'   =>  'log',
+                    'op'    =>  'admin'
+                ],
+            ]
+        ],
 
         array('name' => '模板','child'=>array(
             array('name' => '模板设置', 'act'=>'templateList', 'op'=>'Template'),

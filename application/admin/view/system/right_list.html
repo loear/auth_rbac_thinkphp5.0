@@ -6,8 +6,8 @@
     <div class="fixed-bar">
         <div class="item-title">
             <div class="subject">
-                <h3>角色管理</h3>
-                <h5>网站系统角色管理</h5>
+                <h3>权限资源管理</h3>
+                <h5>网站系统权限资源管理</h5>
             </div>
         </div>
     </div>
@@ -18,16 +18,24 @@
             <span title="收起提示" id="explanationZoom" style="display: block;"></span>
         </div>
         <ul>
-            <li>网站系统角色, 由总平台设置管理.</li>
+            <li>权限资源管理, 由总平台设置管理.</li>
         </ul>
     </div>
     <div class="flexigrid">
         <div class="mDiv">
             <div class="ftitle">
-                <h3>角色列表</h3>
-                <h5>(共{$list|count}条记录)</h5>
+                <h3>权限资源列表</h3>
+                <h5>(共{$right_list|count}条记录)</h5>
             </div>
             <div title="刷新数据" class="pReload"><i class="fa fa-refresh"></i></div>
+            <form class="navbar-form form-inline" action="{:url('admin/System/rightList')}" method="get">
+                <div class="sDiv">
+                    <div class="sDiv2">
+                        <input type="text" size="30" name="name" class="qsbox" placeholder="搜索相关数据...">
+                        <input type="submit" class="btn" value="搜索">
+                    </div>
+                </div>
+            </form>
         </div>
         <div class="hDiv">
             <div class="hDivBox">
@@ -38,13 +46,13 @@
                             <div style="width: 24px;"><i class="ico-check"></i></div>
                         </th>
                         <th align="left" abbr="article_title" axis="col3" class="">
-                            <div style="text-align: left; width: 100px;" class="">ID</div>
-                        </th>
-                        <th align="left" abbr="ac_id" axis="col4" class="">
-                            <div style="text-align: left; width: 100px;" class="">角色名称</div>
+                            <div style="text-align: left; width: 100px;" class="">名称</div>
                         </th>
                         <th align="center" abbr="article_show" axis="col5" class="">
-                            <div style="text-align: left; width: 100px;" class="">描述</div>
+                            <div style="text-align: center; width: 100px;" class="">所属分组</div>
+                        </th>
+                        <th align="center" abbr="article_time" axis="col6" class="">
+                            <div style="text-align: center; width: 500px;" class="">权限码</div>
                         </th>
                         <th align="center" axis="col1" class="handle">
                             <div style="text-align: center; width: 150px;">操作</div>
@@ -60,9 +68,9 @@
         <div class="tDiv">
             <div class="tDiv2">
                 <div class="fbutton">
-                    <a href="{:url('admin/Admin/roleInfo', ['id'=>0])}">
-                        <div class="add" title="添加角色">
-                            <span><i class="fa fa-plus"></i>添加角色</span>
+                    <a href="{:url('admin/System/editRight', ['id'=>0])}">
+                        <div class="add" title="添加平台权限">
+                            <span><i class="fa fa-plus"></i>添加平台权限</span>
                         </div>
                     </a>
                 </div>
@@ -73,32 +81,30 @@
             <div id="flexigrid" cellpadding="0" cellspacing="0" border="0">
                 <table>
                     <tbody>
-                    {foreach name="list" item="vo" key="k" }
-                        <if condition="$vo['id'] gt 1">
-                            <tr>
-                                <td class="sign">
-                                    <div style="width: 24px;"><i class="ico-check"></i></div>
-                                </td>
-                                <td align="left" class="">
-                                    <div style="text-align: left; width: 100px;">{$vo.id}</div>
-                                </td>
-                                <td align="left" class="">
-                                    <div style="text-align: left; width: 100px;">{$vo.role_name}</div>
-                                </td>
-                                <td align="left" class="">
-                                    <div style="text-align: left; width: 100px;">{$vo.role_desc}</div>
-                                </td>
-                                <td align="center" class="handle">
-                                    <div style="text-align: center; width: 170px; max-width:170px;">
-                                        <a href="{:url('admin/Admin/roleInfo', ['id'=>$vo['id']])}" class="btn blue"><i class="fa fa-pencil-square-o"></i>编辑</a>
-                                        <a class="btn red"  href="javascript:void(0)" data-url="{:url('admin/Admin/roleDel')}" data-id="{$vo.id}" onclick="delfun(this)"><i class="fa fa-trash-o"></i>删除</a>
-                                    </div>
-                                </td>
-                                <td align="" class="" style="width: 100%;">
-                                    <div>&nbsp;</div>
-                                </td>
-                            </tr>
-                        </if>
+                    {foreach name="right_list" item="vo" key="k" }
+                        <tr>
+                            <td class="sign">
+                                <div style="width: 24px;"><i class="ico-check"></i></div>
+                            </td>
+                            <td align="left" class="">
+                                <div style="text-align: left; width: 100px;">{$vo.name}</div>
+                            </td>
+                            <td align="left" class="">
+                                <div style="text-align: left; width: 100px;">{$group[$vo.group]}</div>
+                            </td>
+                            <td align="left" class="">
+                                <div style="text-align: left; width: 500px;">{$vo.right}</div>
+                            </td>
+                            <td align="center" class="handle">
+                                <div style="text-align: center; width: 170px; max-width:170px;">
+                                    <a href="{:url('admin/System/editRight', ['id'=>$vo['id']])}" class="btn blue"><i class="fa fa-pencil-square-o"></i>编辑</a>
+                                    <a class="btn red"  href="javascript:void(0)" data-url="{:url('admin/System/rightDel')}" data-id="{$vo.id}" onClick="delfun(this)"><i class="fa fa-trash-o"></i>删除</a>
+                                </div>
+                            </td>
+                            <td align="" class="" style="width: 100%;">
+                                <div>&nbsp;</div>
+                            </td>
+                        </tr>
                     {/foreach}
                     </tbody>
                 </table>
@@ -107,9 +113,9 @@
         </div>
         <!--分页位置-->
         <div style="text-align: center">
-            {$list->render()}
+            {$right_list->render()}
         </div>
-        </div>
+         </div>
 </div>
 <script>
     $(document).ready(function(){
@@ -134,7 +140,7 @@
             $.ajax({
                 type: 'post',
                 url: $(obj).attr('data-url'),
-                data : {id:$(obj).attr('data-id')},
+                data: {del_id: $(obj).attr('data-id')},
                 dataType: 'json',
                 success: function (data) {
                     layer.closeAll();
@@ -146,6 +152,7 @@
                 }
             })
         }, function () {
+            layer.closeAll();
         });
     }
 </script>

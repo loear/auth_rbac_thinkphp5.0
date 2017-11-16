@@ -23,13 +23,20 @@
 use think\Route;
 
 Route::group('admin', function(){
-    // 分类
+    // 管理员
     Route::group('admin', [
         'index'             =>  ['admin/Admin/index',       ['method' => 'get']  ],
         'admin_info/:id'    =>  ['admin/Admin/adminInfo',   ['method' => 'get'], ['id' => '\d+']  ],
         'admin_handle'      =>  ['admin/Admin/adminHandle', ['method' => 'post'] ],
-//        'edit/:id'      =>  ['admin/Category/edit',        ['method' => 'get'], ['id' => '\d+']],
-
+        'role_info/:id'     =>  ['admin/Admin/roleInfo',    ['method' => 'get'], ['id' => '\d+']  ],
+        'role_save'         =>  ['admin/Admin/roleSave',    ['method' => 'post'] ],
+        'role_del'          =>  ['admin/Admin/roleDel',     ['method' => 'post'] ],
+    ]);
+    // 系统
+    Route::group('system', [
+        'right_list'        =>  ['admin/System/rightList',      ['method' => 'get']  ],
+        'edit_right/:id'        =>  ['admin/System/editRight',      ['method' => 'get|post'], ['id' => '\d+']  ],
+        'ajax_get_action'   =>  ['admin/System/ajaxGetAction',  ['method' => 'get']  ],
     ]);
 
 

@@ -2435,7 +2435,7 @@ margin: 0 auto!important; padding: 0; zoom: 1; }
 .pagination ul li {
 *display: inline/*IE6,7*/;
 *float: left; zoom: 1; }
-.pagination li span { font-size: 12px; line-height: 24px; color: #AAA; list-style-type: none; background-color: #F5F5F5; display: block; height: 24px; padding: 0px 8px; margin: 0px; border: 1px solid; border-color: #DCDCDC #DCDCDC #B8B8B8 #DCDCDC; }
+.pagination li span { font-size: 12px; /*line-height: 24px;*/ color: #AAA; list-style-type: none; background-color: #F5F5F5; display: block; /*height: 24px;*/ padding: 0px 8px; margin: 0px; border: 1px solid; border-color: #DCDCDC #DCDCDC #B8B8B8 #DCDCDC; }
 .pagination li:first-child span { border-radius: 4px 0 0 4px; }
 .pagination li:last-child span { border-radius: 0 4px 4px 0; }
 .pagination li a span,

@@ -32,4 +32,19 @@ return [
         '__ROOT__'      =>  '/'
     ],
     'auth_code' =>  'Ns3Kd',    // 密码;
+
+    'ng_privilege' => [
+        'system'        =>  '系统设置',
+        'content'       =>  '内容管理',
+        'goods'         =>  '商品中心',
+        'member'        =>  '会员中心',
+        'order'         =>  '订单中心',
+        'marketing'     =>  '营销推广',
+        'tools'         =>  '插件工具',
+        'count'         =>  '统计报表',
+        'weixin'        =>  '微信管理',
+        'store'         =>  '店铺管理',
+        'distribut'     =>  '分销管理',
+        'maintenance'   =>  '运营'
+    ],
 ];
