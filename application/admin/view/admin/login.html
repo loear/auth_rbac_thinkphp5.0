@@ -144,20 +144,24 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-offset-3 col-md-6">
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" id="theForm">
                         <span class="heading">用户登录</span>
+                        <div id="error" style="color:red;">1231</div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="inputEmail3" placeholder="用户名">
+                            <input type="text" name="username" class="form-control" id="username" placeholder="用户名">
                             <i class="fa fa-user"></i>
                         </div>
                         <div class="form-group help">
-                            <input type="password" class="form-control" id="inputPassword3" placeholder="密　码">
+                            <input type="password" name="password" class="form-control" id="password" placeholder="密　码">
                             <i class="fa fa-lock"></i>
                             <a href="#" class="fa fa-question-circle"></a>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="inputEmail3" placeholder="验证码">
-                            <i class="fa fa-user"></i>
+                            <input type="text" name="vertify" class="form-control" id="captcha" placeholder="验证码">
+                            <i class="fa fa-smile-o"></i>
+                            <span style="width:100px;position: absolute;right: 60px;top:0px;">
+                                <img src="{:captcha_src()}" alt="captcha" id="imgVerify" onclick="flushVerify()"/>
+                            </span>
                         </div>
                         <div class="form-group">
                             <div class="main-checkbox">
@@ -172,5 +176,80 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="__PUBLIC__/static/js/jquery.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            /*$('.submit_span .sub').on('click',function(){
+                $('.code').show();
+            });*/
+            $('#theForm input[name=submit]').on('click',function(event){
+                event.preventDefault();
+                var username=true;
+                var password=true;
+                var vertify=true;
+
+                if($('#theForm input[name=username]').val() == ''){
+                    $('#error').html('<span class="error">用户名不能为空!</span>');
+                    $('#theForm input[name=username]').focus();
+                    username = false;
+                    return false;
+                }
+
+                if($('#theForm input[name=password]').val() == ''){
+                    $('#error').html('<span class="error">密码不能为空!</span>');
+                    $('#theForm input[name=password]').focus();
+                    password = false;
+                    return false;
+                }
+
+                if($('#theForm input[name=vertify]').val() == ''){
+                    $('#error').html('<span class="error">验证码不能为空!</span>');
+                    $('#theForm input[name=vertify]').focus();
+                    vertify = false;
+                    return false;
+                }
+
+                if(vertify && $('#theForm input[name=username]').val() != '' && $('#theForm input[name=password]').val() != ''){
+                    $.ajax({
+                        async:false,
+                        url:'/index.php?m=admin&c=Admin&a=login&t='+Math.random(),
+                        data:{'username':$('#theForm input[name=username]').val(),'password':$('#theForm input[name=password]').val(),vertify:$('#theForm input[name=vertify]').val()},
+                        type:'post',
+                        dataType:'json',
+                        success:function(res){
+                            if(res.status != 1){
+                                $('#error').html('<span class="error">'+res.msg+'!</span>');
+                                flushVerify();
+                                username=false;
+                                password=false;
+                                return false;
+                            }else{
+                                top.location.href = res.url;
+                            }
+                        },
+                        error : function(XMLHttpRequest, textStatus, errorThrown) {
+                            $('#error').html('<span class="error">网络失败，请刷新页面后重试!</span>');
+                        }
+                    });
+                }else{
+                    return false;
+                }
+            });
+
+            /*$(document).click(function(e){
+                if(e.target.name !='vertify' && !$(e.target).parents("div").is(".submitDiv")){
+                    $('.code').hide();
+                }
+            });*/
+        });
+
+        function flushVerify(){
+            var src = $('#imgVerify').attr('src'); //重载验证码
+            if (src.indexOf("?") > 0) {
+                src = src.substring(0, src.indexOf("?"));
+            }
+            $('#imgVerify').attr('src', src + '?r='+Math.floor(Math.random()*100));//重载验证码
+        }
+    </script>
 </body>
 </html>

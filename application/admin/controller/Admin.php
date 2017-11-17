@@ -209,33 +209,44 @@ class Admin extends Base
         }
 
         if ($request->isPost()) {
-            $verify = new Verify();
-            if (!$verify->check($request->post('vertify'), "admin_login")) {
+            if (!captcha_check($request->post('vertify'))) {
                 exit(json_encode(['status'=>0, 'msg'=>'验证码错误']));
-            }
+            };
             $condition['user_name'] = $request->post('username');
             $condition['password'] = $request->post('password');
             if (!empty($condition['user_name']) && !empty($condition['password'])) {
                 $condition['password'] = encrypt($condition['password']);
-                $admin_info = M('admin')->alias('a')->join('__ADMIN_ROLE__ r','a.role_id=r.role_id','INNER')->where($condition)->find();
-                if(is_array($admin_info)){
-                    session('admin_id',$admin_info['admin_id']);
-                    session('act_list',$admin_info['act_list']);
-                    M('admin')->where("admin_id = ".$admin_info['admin_id'])->save(array('last_login'=>time(),'last_ip'=>  getIP()));
-                    session('last_login_time',$admin_info['last_login']);
-                    session('last_login_ip',$admin_info['last_ip']);
-                    adminLog('后台登录',0);
-                    $url = session('from_url') ? session('from_url') : U('Admin/Index/index');
-                    exit(json_encode(array('status'=>1,'url'=>$url)));
-                }else{
-                    exit(json_encode(array('status'=>0,'msg'=>'账号密码不正确')));
+                $admin_info = AdminModel::with('role')->where($condition)->find()->toArray();
+                if (is_array($admin_info)) {
+                    session('admin_id', $admin_info['id']);
+                    session('act_list', $admin_info['role']['act_list']);
+                    $model = AdminModel::find($admin_info['id']);
+                    $model->last_login_time = time();
+                    $model->last_login_ip = getIP();
+                    $model->save();
+                    session('last_login_time', $model->last_login_time);
+                    session('last_login_ip', $model->last_login_ip);
+                    adminLog('后台登录', 0);
+                    $url = session('from_url') ? session('from_url') : url('admin/Index/index');
+                    exit(json_encode(array('status'=>1, 'url'=>$url)));
+                } else {
+                    exit(json_encode(array('status'=>0, 'msg'=>'账号密码不正确')));
                 }
-            }else{
-                exit(json_encode(array('status'=>0,'msg'=>'请填写账号密码')));
+            } else {
+                exit(json_encode(array('status'=>0, 'msg'=>'请填写账号密码')));
             }
         }
-
         return view();
+    }
+
+    /**
+     * 获取验证码
+     *
+     * @return string
+     */
+    public function vertify()
+    {
+        return captcha_src();
     }
 
 

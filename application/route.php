@@ -31,11 +31,13 @@ Route::group('admin', function(){
         'role_info/:id'     =>  ['admin/Admin/roleInfo',    ['method' => 'get'], ['id' => '\d+']  ],
         'role_save'         =>  ['admin/Admin/roleSave',    ['method' => 'post'] ],
         'role_del'          =>  ['admin/Admin/roleDel',     ['method' => 'post'] ],
+        'login'             =>  ['admin/Admin/login',       ['method' => 'get'] ],
+        'vertify'           =>  ['admin/Admin/vertify',     ['method' => 'get'] ],
     ]);
     // 系统
     Route::group('system', [
         'right_list'        =>  ['admin/System/rightList',      ['method' => 'get']  ],
-        'edit_right/:id'        =>  ['admin/System/editRight',      ['method' => 'get|post'], ['id' => '\d+']  ],
+        'edit_right/:id'    =>  ['admin/System/editRight',      ['method' => 'get|post'], ['id' => '\d+']  ],
         'ajax_get_action'   =>  ['admin/System/ajaxGetAction',  ['method' => 'get']  ],
     ]);
 
