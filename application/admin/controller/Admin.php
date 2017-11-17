@@ -204,7 +204,7 @@ class Admin extends Base
 
     public function login(Request $request)
     {
-        if (session('?admin_id') && session('admin_id')>0) {
+        if (session('?admin_id') && session('admin_id') > 0) {
             $this->error("您已登录", url('admin/Index/index'));
         }
 
@@ -215,7 +215,7 @@ class Admin extends Base
             }
             $condition['user_name'] = $request->post('username');
             $condition['password'] = $request->post('password');
-            if(!empty($condition['user_name']) && !empty($condition['password'])){
+            if (!empty($condition['user_name']) && !empty($condition['password'])) {
                 $condition['password'] = encrypt($condition['password']);
                 $admin_info = M('admin')->alias('a')->join('__ADMIN_ROLE__ r','a.role_id=r.role_id','INNER')->where($condition)->find();
                 if(is_array($admin_info)){
@@ -235,7 +235,7 @@ class Admin extends Base
             }
         }
 
-        return $this->fetch();
+        return view();
     }
 
 
