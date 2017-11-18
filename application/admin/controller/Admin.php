@@ -226,7 +226,8 @@ class Admin extends Base
                     $model->save();
                     session('last_login_time', $model->last_login_time);
                     session('last_login_ip', $model->last_login_ip);
-                    adminLog('后台登录', 0);
+                    $admin_log_model = new AdminLogModel();
+                    $admin_log_model->saveLog('后台登录', 0);
                     $url = session('from_url') ? session('from_url') : url('admin/Index/index');
                     exit(json_encode(array('status'=>1, 'url'=>$url)));
                 } else {
@@ -247,6 +248,13 @@ class Admin extends Base
     public function vertify()
     {
         return captcha_src();
+    }
+
+    public function logout()
+    {
+        session_unset();
+        session_destroy();
+        $this->success("退出成功", url('admin/Admin/login'));
     }
 
 

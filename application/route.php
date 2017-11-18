@@ -31,8 +31,9 @@ Route::group('admin', function(){
         'role_info/:id'     =>  ['admin/Admin/roleInfo',    ['method' => 'get'], ['id' => '\d+']  ],
         'role_save'         =>  ['admin/Admin/roleSave',    ['method' => 'post'] ],
         'role_del'          =>  ['admin/Admin/roleDel',     ['method' => 'post'] ],
-        'login'             =>  ['admin/Admin/login',       ['method' => 'get'] ],
+        'login'             =>  ['admin/Admin/login',       ['method' => 'get|post'] ],
         'vertify'           =>  ['admin/Admin/vertify',     ['method' => 'get'] ],
+        'logout'            =>  ['admin/Admin/logout',      ['method' => 'get'] ],
     ]);
     // 系统
     Route::group('system', [
