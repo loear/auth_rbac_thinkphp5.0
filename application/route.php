@@ -34,6 +34,7 @@ Route::group('admin', function(){
         'login'             =>  ['admin/Admin/login',       ['method' => 'get|post'] ],
         'vertify'           =>  ['admin/Admin/vertify',     ['method' => 'get'] ],
         'logout'            =>  ['admin/Admin/logout',      ['method' => 'get'] ],
+        'modify_pwd/:id'    =>  ['admin/Admin/modifyPwd',   ['method' => 'get|post'], ['id' => '\d+'] ],
     ]);
     // 系统
     Route::group('system', [

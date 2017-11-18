@@ -140,6 +140,14 @@
             line-height:40px;
             color: #ff3b62;
         }
+        .error {
+            display: inline-block;
+            width: 200px;
+            height: 24px;
+            background: #E0E0E0;
+            line-height: 24px;
+            border-radius: 12px;
+        }
     </style>
     <!--[if IE]>
     <script src="http://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -257,6 +265,10 @@
             }
             $('#imgVerify').attr('src', src + '?r='+Math.floor(Math.random()*100));//重载验证码
         }
+
+        $('#error').click(function () {
+            $('#error').html('');
+        });
     </script>
 </body>
 </html>

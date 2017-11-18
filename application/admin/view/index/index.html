@@ -61,7 +61,8 @@
             <div class="manager-menu">
                 <div class="title">
                     <h4>最后登录</h4>
-                    <a href="javascript:void(0);" onClick="layer.open({type: 2,title: '修改密码',shadeClose: true,shade: 0.3,area: ['30%', '40%'],content:'{:url('Admin/modify_pwd',array('id'=>$admin_info['id']))}'});" class="edit-password">修改密码</a> </div>
+                    <a href="javascript:void(0);" onClick="layer.open({type: 2,title: '修改密码',shadeClose: true,shade: 0.3,area: ['30%', '40%'],content:'{:url('admin/Admin/modifyPwd', ['id'=>$admin_info['id']])}'});" class="edit-password">修改密码</a>
+                </div>
                 <div class="login-date"> <?php echo date('Y-m-d H:i:s',session('last_login_time'));?> <span>(IP: <?php echo session('last_login_ip');?> )</span> </div>
                 <div class="title">
                     <h4>常用操作</h4>

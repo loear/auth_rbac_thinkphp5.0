@@ -257,5 +257,33 @@ class Admin extends Base
         $this->success("退出成功", url('admin/Admin/login'));
     }
 
+    public function modifyPwd($id, Request $request)
+    {
+        if ($id && $request->isGet()) {
+            $info = AdminModel::find($id);
+            $info['password'] =  "";
+            $this->assign(compact('info'));
+        }
+        if ($request->isPost()) {
+            //修改密码
+            $enOldPwd = encrypt($request->post('old_pwd'));
+            $enNewPwd = encrypt($request->post('new_pwd'));
+            $admin = AdminModel::find($id);
+            if(!$admin || $admin['password'] != $enOldPwd){
+                exit(json_encode(['status'=>-1, 'msg'=>'旧密码不正确']));
+            }else if($request->post('new_pwd') != $request->post('new_pwd2')){
+                exit(json_encode(['status'=>-1, 'msg'=>'两次密码不一致']));
+            }else{
+                $admin->password = $enNewPwd;
+                $admin->save();
+                if ($admin->id) {
+                    exit(json_encode(['status'=>1, 'msg'=>'修改成功']));
+                }else{
+                    exit(json_encode(['status'=>-1, 'msg'=>'修改失败']));
+                }
+            }
+        }
+        return view('modify_pwd');
+    }
 
 }
