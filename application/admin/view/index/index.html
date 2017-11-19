@@ -10,7 +10,7 @@
     <!-- Apple devices fullscreen -->
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="shortcut icon" type="image/x-icon" href="__PUBLIC__/images/favicon.ico" media="screen"/>
-    <title>TPshop2.0</title>
+    <title>Loear v1.0</title>
     <script type="text/javascript">
         var SITEURL = window.location.host +'/index.php/admin';
     </script>
@@ -32,22 +32,17 @@
     <div id="foldSidebar"><i class="fa fa-outdent " title="展开/收起侧边导航"></i></div>
     <div class="admincp-name" onClick="javascript:openItem('welcome|Index');">
         <h2 style="cursor:pointer;">Loear v1.0<br>平台系统管理中心</h2>
-        <!--<img src="__PUBLIC__/static/images/TPlogo.png" alt="">-->
     </div>
     <div class="nc-module-menu">
         <ul class="nc-row">
             <li data-param="system"><a href="javascript:void(0);">系统</a></li>
-            <li data-param="shop"><a href="javascript:void(0);">商城</a></li>
-            <!--      <li data-param="mobile"><a href="javascript:void(0);">模板</a></li>-->
+            <!--<li data-param="shop"><a href="javascript:void(0);">商城</a></li>
+            <li data-param="mobile"><a href="javascript:void(0);">模板</a></li>-->
             <li data-param="resource"><a href="javascript:void(0);">插件</a></li>
         </ul>
     </div>
     <div class="admincp-header-r">
         <div class="manager">
-            <dl>
-                <dt class="name">Loear1.0公测版</dt>
-                <dd class="group">ThinkPHP5框架测试版</dd>
-            </dl>
             <dl>
                 <dt class="name">{$admin_info.user_name}</dt>
                 <dd class="group">管理员</dd>
@@ -61,23 +56,23 @@
             <div class="manager-menu">
                 <div class="title">
                     <h4>最后登录</h4>
-                    <a href="javascript:void(0);" onClick="layer.open({type: 2,title: '修改密码',shadeClose: true,shade: 0.3,area: ['30%', '40%'],content:'{:url('admin/Admin/modifyPwd', ['id'=>$admin_info['id']])}'});" class="edit-password">修改密码</a>
                 </div>
-                <div class="login-date"> <?php echo date('Y-m-d H:i:s',session('last_login_time'));?> <span>(IP: <?php echo session('last_login_ip');?> )</span> </div>
+                <div class="login-date"> <?php echo date('m-d H:i',session('last_login_time'));?> <span>(IP: <?php echo session('last_login_ip');?> )</span> </div>
                 <div class="title">
                     <h4>常用操作</h4>
-                    <a href="javascript:void(0)" class="add-menu">添加菜单</a> </div>
+                    <!--<a href="javascript:void(0)" class="add-menu">添加菜单</a>-->
+                </div>
                 <ul class="nc-row" tptype="quick_link">
                     <li><a href="javascript:void(0);" onclick="openItem('index|System')">站点设置</a></li>
+                    <li> <a href="javascript:void(0);" onClick="layer.open({type: 2,title: '修改密码',shadeClose: true,shade: 0.3,area: ['30%', '40%'],content:'{:url('admin/Admin/modifyPwd', ['id'=>$admin_info['id']])}'});" class="edit-password">修改密码</a></li>
                 </ul>
             </div>
         </div>
         <ul class="operate nc-row">
-            <!--<li tptype="pending_matters"><a class="toast show-option" href="javascript:void(0);" onClick="$.cookie('commonPendingMatters', 0, {expires : -1});ajax_form('pending_matters', '待处理事项', 'http://www.tpshop.cn/admin/index.php?act=common&op=pending_matters', '480');" title="查看待处理事项">&nbsp;<em>0</em></a></li
-            li><a class="style-color show-option" tptype="map_on" href="javascript:void(0);" title="查看全部管理菜单">&nbsp;</a></li -->
-            <li><a class="sitemap show-option" id="trace_show" href="{:url('System/cleanCache')}" target="workspace" title="更新缓存">&nbsp;</a></li>
-            <li><a class="homepage show-option" target="_blank" href="/" title="新窗口打开商城首页">&nbsp;</a></li>
-            <li><a class="login-out show-option" href="{:url('Admin/logout')}" title="安全退出管理中心">&nbsp;</a></li>
+            <li><a class="style-color show-option" tptype="map_on" href="javascript:void(0);" title="查看全部管理菜单">&nbsp;</a></li>
+            <li><a class="sitemap show-option" id="trace_show" href="{:url('admin/System/cleanCache')}" target="workspace" title="更新缓存">&nbsp;</a></li>
+            <!--<li><a class="homepage show-option" target="_blank" href="/" title="新窗口打开首页">&nbsp;</a></li>-->
+            <li><a class="login-out show-option" href="{:url('Admin/logout')}" title="安全退出">&nbsp;</a></li>
         </ul>
     </div>
     <div class="clear"></div>
@@ -101,6 +96,35 @@
             // 执行定时任务
         }
     });
+</script>
+<script>
+    $(document).ready(function(){
+        if ($(window).width() < 660) {
+            $('#foldSidebar > i').addClass('fa-indent').removeClass('fa-outdent');
+            $('.sub-menu').removeAttr('style');
+            $('.admincp-container').addClass('fold').removeClass('unfold');
+        }
+    });
+
+    window.onresize = function(){
+        if ($(window).width() < 660) {
+            $('#foldSidebar > i').addClass('fa-indent').removeClass('fa-outdent');
+            $('.sub-menu').removeAttr('style');
+            $('.admincp-container').addClass('fold').removeClass('unfold');
+        }
+        if ($(window).width() > 660) {
+            $('#foldSidebar > i').addClass('fa-outdent').removeClass('fa-indent');
+            $('.nav-tabs').each(function(i){
+                $(this).find('dl').each(function(i){
+                    $(this).find('dd').css('top', (-70)*i + 'px');
+                    if ($(this).hasClass('active')) {
+                        $(this).find('dd').show();
+                    }
+                });
+            });
+            $('.admincp-container').addClass('unfold').removeClass('fold');
+        }
+    }
 </script>
 </body>
 </html>

@@ -41,6 +41,7 @@ Route::group('admin', function(){
         'right_list'        =>  ['admin/System/rightList',      ['method' => 'get']  ],
         'edit_right/:id'    =>  ['admin/System/editRight',      ['method' => 'get|post'], ['id' => '\d+']  ],
         'ajax_get_action'   =>  ['admin/System/ajaxGetAction',  ['method' => 'get']  ],
+        'clean_cache'        =>  ['admin/System/cleanCache',    ['method' => 'get']  ],
     ]);
 
 

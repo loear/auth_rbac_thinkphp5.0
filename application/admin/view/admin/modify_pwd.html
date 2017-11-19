@@ -38,9 +38,11 @@
                         if(obj.status !=1){
                             layer.alert(obj.msg, {icon: 3});
                         }else{
-                            var dialog = DialogManager.get('modifypw');
-                            dialog.close();
-                            layer.alert('密码修改成功!', {icon: 3});
+                            var index = parent.layer.getFrameIndex(window.name);
+                            parent.layer.msg('密码修改成功', {icon:1, time:1000});
+                            setTimeout(function(){
+                                parent.layer.close(index);
+                            },1200);
                         }
                     }
                 });

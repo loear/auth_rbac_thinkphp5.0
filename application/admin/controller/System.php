@@ -12,6 +12,11 @@ use think\Request;
 
 class System extends Base
 {
+    /**
+     * 权限资源列表
+     *
+     * @return \think\response\View
+     */
     function rightList()
     {
         $group = config('ng_privilege');
@@ -23,6 +28,13 @@ class System extends Base
         return view('right_list');
     }
 
+    /**
+     * 编辑权限
+     *
+     * @param $id
+     * @param Request $request
+     * @return \think\response\View
+     */
     public function editRight($id, Request $request){
         if ($request->isPost()) {
             $data = $request->post();
@@ -65,14 +77,14 @@ class System extends Base
         return view('edit_right');
     }
 
+    /**
+     * ajax请求 获取动作
+     */
     public function ajaxGetAction()
     {
         $control = input('controller');
-
         $advContrl = get_class_methods("app\\admin\\controller\\" . $control);
         $baseContrl = get_class_methods('app\admin\controller\Base');
-
-
         $diffArray  = array_diff($advContrl, $baseContrl);
         $html = '';
         foreach ($diffArray as $val){
@@ -82,6 +94,16 @@ class System extends Base
             }
         }
         exit($html);
+    }
+
+    /**
+     * 清空系统缓存
+     */
+    public function cleanCache(){
+        delFile(RUNTIME_PATH);
+        \think\Cache::clear();
+        $this->success("操作完成!!!", url('admin/Index/welcome'));
+        exit();
     }
 
 }

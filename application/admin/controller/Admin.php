@@ -201,7 +201,12 @@ class Admin extends Base
         return view();
     }
 
-
+    /**
+     * 登录
+     *
+     * @param Request $request
+     * @return \think\response\View
+     */
     public function login(Request $request)
     {
         if (session('?admin_id') && session('admin_id') > 0) {
@@ -250,6 +255,9 @@ class Admin extends Base
         return captcha_src();
     }
 
+    /**
+     * 注销
+     */
     public function logout()
     {
         session_unset();
@@ -257,6 +265,13 @@ class Admin extends Base
         $this->success("退出成功", url('admin/Admin/login'));
     }
 
+    /**
+     * 修改密码
+     *
+     * @param $id
+     * @param Request $request
+     * @return \think\response\View
+     */
     public function modifyPwd($id, Request $request)
     {
         if ($id && $request->isGet()) {
