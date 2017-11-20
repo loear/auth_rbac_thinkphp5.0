@@ -286,7 +286,7 @@ a:hover.ncap-btn-black,
 a.ncap-btn-blue { background-color: #3598DC; border-color: #2A80B9; }
 a.ncap-btn-acidblue,
 .nscs-table-handle a:hover.btn-acidblue { background-color: #49AFCD; border-color: #429DB8 #429DB8 #37839A #429DB8; }
-a.ncap-btn-green { background-color: #4fc0e8; border-color: #3aa8cf; }
+a.ncap-btn-green { background-color: #f76b8a; border-color: #f34a68; }
 a.ncap-btn-orange,
 .nscs-table-handle a:hover.btn-orange,
 .nscs-table-handle a.btn-orange-current { background-color: #FAA732; margin: 0; border-style: solid; border-width: 1px; border-color: #E1962D #E1962D #BB7D25 #E1962D !important; }
@@ -296,7 +296,7 @@ a.ncap-btn-black,
 .nscs-table-handle a:hover.btn-black { background-color: #363636; border-color: #313131 #313131 #282828 #313131; }
 a:hover.ncap-btn-blue { background-color: #2A80B9; }
 a:hover.ncap-btn-acidblue { background-color: #2F96B4; border-color: #2A87A2 #2A87A2 #237087 #2A87A2; }
-a:hover.ncap-btn-green { background-color: #3aa8cf; }
+a:hover.ncap-btn-green { background-color: #f34a68; }
 a:hover.ncap-btn-orange { background-color: #F89406; border-color: #DF8505 #DF8505 #BA6F04 #DF8505; }
 a:hover.ncap-btn-red { background-color: #BD362F; border-color: #AA312A #AA312A #8E2823 #AA312A; }
 a:hover.ncap-btn-black { background-color: #222222; border-color: #1F1F1F #1F1F1F #191919 #1F1F1F; }
@@ -326,7 +326,7 @@ position: relative; z-index: 1; }
 
 /* 头部
 ******************************/
-.admincp-header { background-color: #293038; width: 100%; position: relative; z-index: 2; }
+.admincp-header { background-color: #66BFBF; width: 100%; position: relative; z-index: 2; }
 .admincp-name { width: 192px; padding: 10px 0 6px 18px; float: left; text-shadow: 0 1px 3px rgba(0,0,0,0.25); }
 .admincp-name h1 { font-family: Verdana, Geneva, sans-serif; font-size: 14px; line-height: 20px; font-weight: 700; color: #FFF; }
 .admincp-name h2 { font-size: 12px; line-height: 16px; color: #FFF; }
@@ -467,9 +467,9 @@ height: 32px; margin-right: 1px; margin-bottom: -1px; }
 .fold .admincp-container-left .about span { display: none; }
 .unfold .top-border { font-size: 0; line-height: 0; width: 210px; height: 2px; position: absolute; z-index: 1; top: -2px; left: 0; }
 .unfold .top-border .nav-side {
-filter:progid:DXImageTransform.Microsoft.gradient(enabled='true', startColorstr='#A5000000', endColorstr='#A5000000'); background: #293038; display: inline-block; width: 70px; height: 2px; }
+filter:progid:DXImageTransform.Microsoft.gradient(enabled='true', startColorstr='#A5000000', endColorstr='#A5000000'); background: #4a8585; display: inline-block; width: 70px; height: 2px; }
 .unfold .top-border .sub-side {
-filter:progid:DXImageTransform.Microsoft.gradient(enabled='true', startColorstr='#59000000', endColorstr='#59000000'); background: #293038; display: inline-block; width: 140px; height: 2px; }
+filter:progid:DXImageTransform.Microsoft.gradient(enabled='true', startColorstr='#59000000', endColorstr='#59000000'); background: #4a8585; display: inline-block; width: 140px; height: 2px; }
 .unfold .nav-tabs { width: 210px; overflow: hidden; height: 100%; }
 .unfold .nav-tabs dl { width: 100%; position: relative; z-index: 1; }
 .unfold .nav-tabs dl.active { z-index: 2; }
@@ -622,7 +622,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(enabled='true', startColorstr=
 .fold .nav-tabs dl dd li.active a { color: #FFF !important; font-weight: 700; display: block; }
 .admincp-container-right { background-color: #FFF; position: absolute; z-index: 1; top: 2px; right: 0; bottom: 0; left: 210px; }
 .admincp-container-right .top-border { font-size: 0; line-height: 0; filter:progid:DXImageTransform.Microsoft.gradient(enabled='true', startColorstr='#26000000', endColorstr='#26000000');
-background: #293038; display: block; width: 100%; height: 2px; position: absolute; z-index: 1; top: -2px; left: 0; }
+background: #4a8585; display: block; width: 100%; height: 2px; position: absolute; z-index: 1; top: -2px; left: 0; }
 .fold .admincp-container-right { background-color: #FFF; position: absolute; z-index: 1; top: 2px; right: 0; bottom: 0; left: 40px; }
 .flexigrid { margin-top: 10px; position: relative; z-index: 1; overflow: hidden; }
 /*f表格标题块*/
@@ -686,7 +686,7 @@ line-height: 20px; text-align: left; padding: 2px 10px 2px 0; border-bottom: dot
 display: inline-block; vertical-align: middle; *display: inline/*IE7*/;
 *zoom:1/*IE7*/;
 border: solid 1px #D7D7D7; }
-.flexigrid .sDiv2:hover { border-color: #2cbca3; }
+.flexigrid .sDiv2:hover { border-color: #f76b8a; }
 .flexigrid .sDiv2 .qsbox,
 .flexigrid .sDiv2 .select,
 .flexigrid .sDiv2 .btn { border: none; border-radius: 0; font-size: 12px; vertical-align: top; letter-spacing: normal; display: inline-block; *display: inline/*IE7*/;
@@ -699,7 +699,7 @@ box-shadow: none;
 }
 .flexigrid .sDiv2 .btn { height: 26px; cursor: pointer; border-left: solid 1px #D7D7D7; }
 .flexigrid .sDiv2:hover .btn,
-.flexigrid .sDiv2 .btn:hover { color: #FFF; background-color: #2cbca3; }
+.flexigrid .sDiv2 .btn:hover { color: #FFF; background-color: #f76b8a; }
 .flexigrid .sDiv .a_search { color: #3b639f; display: inline-block; vertical-align: middle; *display: inline/*IE7*/;
 margin-left: 8px; *zoom:1/*IE7*/;
 }
@@ -736,9 +736,9 @@ padding: 6px 0 6px 6px; float: left; overflow: hidden; }
 .flexigrid .fbutton { vertical-align: top; letter-spacing: normal; display: inline-block; *display: inline/*IE7*/;
 padding-right: 8px; margin-left: 8px; margin-right: -1px; border-right: dotted 1px #D7D7D7; *zoom:1/*IE7*/;
 cursor: pointer; }
-.flexigrid .fbutton div { font-size: 12px; line-height: 20px; color: #0ba4da; background-color: #FFFFFF; height: 20px; padding: 2px 7px; border: solid 1px #3aa8cf; border-radius: 4px; }
+.flexigrid .fbutton div { font-size: 12px; line-height: 20px; color: #f76b8a; background-color: #FFFFFF; height: 20px; padding: 2px 7px; border: solid 1px #f34967; border-radius: 4px; }
 .flexigrid .fbutton .add:hover,
-.flexigrid .fbutton.fbOver .add:hover {background: rgba(79, 192, 232, 0.11);}
+.flexigrid .fbutton.fbOver .add:hover {background: #FEECF0;}
 .flexigrid .fbutton .del:hover,
 .flexigrid .fbutton.fbOver .del:hover { color: #E84C3D; border-color: #E84C3D; }
 .flexigrid .fbutton .csv:hover,
@@ -1177,10 +1177,10 @@ padding: 7px 20px !important; border: solid 1px #E6E6E6 !important; border-radiu
 .tab-base a.current,
 .tab-base a:hover.current { font-size: 14px !important; font-weight: 600 !important; background-color: #FFF !important; border-bottom-color: #FFF !important; cursor: default !important; }
 .item-title a.back { color: #999; display: inline-block; vertical-align: bottom; margin: 0 10px 6px 0; }
-.item-title a.back:hover { color: #4fc0e8;}
+.item-title a.back:hover { color: #f76b8a;}
 .item-title a.back i { font-size: 40px; }
 /*注释说明帮助*/
-.explanation { color:#0ba4da !important; background-color: rgba(79, 192, 232, 0.11) !important; display: block; width: 99%; height: 100%; padding: 6px 9px; border-radius: 5px; position: relative; overflow: hidden;  }
+.explanation { color:#f76b8a !important; background-color: #FEECF0 !important; display: block; width: 99%; height: 100%; padding: 6px 9px; border-radius: 5px; position: relative; overflow: hidden;  }
 .explanation:before{content: "";background-image: url(../images/wave.png); width: 100%;height: 100%;position: absolute;top: 0px;left: 0px;border-radius: 5px;background-repeat: no-repeat;background-size: cover;}
 .explanation .title { white-space: nowrap; margin-bottom: 8px; position: relative; cursor: pointer; }
 .explanation .title h4 { font-size: 14px; font-weight: normal; line-height: 20px; height: 20px; display: inline-block; }
