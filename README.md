@@ -84,3 +84,5 @@ CREATE TABLE `ng_admin_log` (
 ```
 
 GRANT ALL PRIVILEGES ON `ng_auth_rbac`.* TO 'guo'@'%' IDENTIFIED BY 'sn_123456' WITH GRANT OPTION;
+
+flush privalige;
