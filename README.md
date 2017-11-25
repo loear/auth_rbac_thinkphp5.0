@@ -87,4 +87,5 @@ GRANT ALL PRIVILEGES ON `ng_auth_rbac`.* TO 'guo'@'%' IDENTIFIED BY 'sn_123456' 
 
 flush privalige;
 
-change
+
+update
